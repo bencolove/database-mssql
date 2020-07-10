@@ -1,0 +1,58 @@
+<deadlock>
+  <victim-list>
+    <victimProcess id="process1da840344e8" />
+  </victim-list>
+  <process-list>
+    <process id="process1da840344e8" taskpriority="5" logused="0" waitresource="RID: 8:1:83592:0" waittime="2939" ownerId="12038129" transactionname="user_transaction" lasttranstarted="2020-07-08T13:10:57.190" XDES="0x1da7b2ec428" lockMode="U" schedulerid="2" kpid="35480" status="suspended" spid="137" sbid="0" ecid="0" priority="-5" trancount="1" lastbatchstarted="2020-07-08T13:10:57.187" lastbatchcompleted="2020-07-08T13:10:57.153" lastattention="1900-01-01T00:00:00.153" clientapp="Microsoft SQL Server Management Studio - 查詢" hostname="IRONROGER" hostpid="2936" loginname="dbadmin" isolationlevel="read committed (2)" xactid="12038129" currentdb="8" currentdbname="italenttrial" lockTimeout="4294967295" clientoption1="671090784" clientoption2="390200">
+      <executionStack>
+        <frame procname="unknown" queryhash="0x67ec054eb30b18a2" queryplanhash="0xa405fca924246771" line="7" stmtstart="234" stmtend="330" sqlhandle="0x02000000de367927987b108af2d892a0f8462053aa7fc3fb0000000000000000000000000000000000000000">
+unknown    </frame>
+      </executionStack>
+      <inputbuf>
+begin transaction
+
+select top 10 *
+from [4月DM1] with (updlock)
+-- wait for 10 seconds
+waitfor delay '00:00:10'
+select top 10 * from sysmg_20190708 with(updlock)
+rollback
+
+
+   </inputbuf>
+    </process>
+    <process id="process1da847c1468" taskpriority="5" logused="0" waitresource="RID: 8:1:70008:0" waittime="10091" ownerId="12038206" transactionname="user_transaction" lasttranstarted="2020-07-08T13:11:00.030" XDES="0x1da6aedc428" lockMode="U" schedulerid="1" kpid="79824" status="suspended" spid="136" sbid="0" ecid="0" priority="-5" trancount="1" lastbatchstarted="2020-07-08T13:11:00.027" lastbatchcompleted="2020-07-08T13:11:00.027" lastattention="1900-01-01T00:00:00.027" clientapp="Microsoft SQL Server Management Studio - 查詢" hostname="IRONROGER" hostpid="2936" loginname="dbadmin" isolationlevel="read committed (2)" xactid="12038206" currentdb="8" currentdbname="italenttrial" lockTimeout="4294967295" clientoption1="671090784" clientoption2="390200">
+      <executionStack>
+        <frame procname="unknown" queryhash="0xc5685461aea58b7a" queryplanhash="0x09fea6ca0e858f1f" line="6" stmtstart="152" stmtend="238" sqlhandle="0x020000000a54e81bfba46f65869a465bd7e080811c3b938b0000000000000000000000000000000000000000">
+unknown    </frame>
+      </executionStack>
+      <inputbuf>
+begin transaction
+
+
+select top 10 * from sysmg_20190708 with(updlock)
+
+select top 10 *
+from [4月DM1] with (updlock)
+rollback   </inputbuf>
+    </process>
+  </process-list>
+  <resource-list>
+    <ridlock fileid="1" pageid="83592" dbid="8" objectname="83d348db-27ac-4d27-89ba-c06e3c7e4efc.dbo.sysmg_20190708" id="lock1da7f5f9d80" mode="U" associatedObjectId="72057594078494720">
+      <owner-list>
+        <owner id="process1da847c1468" mode="U" />
+      </owner-list>
+      <waiter-list>
+        <waiter id="process1da840344e8" mode="U" requestType="wait" />
+      </waiter-list>
+    </ridlock>
+    <ridlock fileid="1" pageid="70008" dbid="8" objectname="83d348db-27ac-4d27-89ba-c06e3c7e4efc.dbo.4月DM1" id="lock1da1cd7e080" mode="U" associatedObjectId="72057594064404480">
+      <owner-list>
+        <owner id="process1da840344e8" mode="U" />
+      </owner-list>
+      <waiter-list>
+        <waiter id="process1da847c1468" mode="U" requestType="wait" />
+      </waiter-list>
+    </ridlock>
+  </resource-list>
+</deadlock>
